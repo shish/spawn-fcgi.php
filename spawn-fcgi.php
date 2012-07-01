@@ -40,7 +40,7 @@
 /* 
  * configurable bits
  */
-define("SPAWN", "/home/shish/bin/spawn-fcgi -s /tmp/fcgi-demo.sock -d /home/shish/fcgi.shishnet.org/app -- ./demo.py fastcgi");
+define("SPAWN", "/home/shish/bin/spawn-fcgi -s /tmp/fcgi-demo.sock -d ".getcwd()." -- ./demo.py fastcgi");
 define("SOCKET", "/tmp/fcgi-demo.sock");
 
 
