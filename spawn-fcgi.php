@@ -315,7 +315,7 @@ function connect() {
 	$connected = false;
 	$errors = 0;
 	while(!$connected && $errors < 5) {
-		$connected = socket_connect($sock, SOCKET);
+		$connected = @socket_connect($sock, SOCKET);
 		if($connected === FALSE) {
 			$errorcode = socket_last_error();
 			# no socket, or first connection refusal
