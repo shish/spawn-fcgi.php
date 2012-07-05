@@ -363,7 +363,7 @@ function pass_request() {
     $content_length = isset($env['CONTENT_LENGTH']) ? (int)$env['CONTENT_LENGTH'] : 0;
     $s = '';
 	$fp = fopen("php://input", "r");
-    while(True) {
+    while($content_length > 0) {
         $chunk_size = min($content_length, 4096);
 		$s = fread($fp, $chunk_size);
         if(!$s) {
