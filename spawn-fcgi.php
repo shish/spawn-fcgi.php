@@ -466,7 +466,7 @@ function pass_request() {
 $req = pass_request();
 
 foreach($req[0] as $header) {
-	header($header[0], $header[1]);
+	header($header[0] .": ". $header[1]);
 }
 
 print $req[1];
