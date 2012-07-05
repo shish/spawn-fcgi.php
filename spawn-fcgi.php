@@ -9,8 +9,9 @@
  * the example SPAWN is a django app (installed in ../app) using a
  * python virtualenv (installed in ../python)
  */
-define("SPAWN", "../python/bin/python ../app/manage.py runfcgi socket=".getcwd()."/../fcgi.sock");
-define("SOCKET", "../fcgi.sock");
+$app_root = getcwd()."/..";
+define("SPAWN", "$app_root/python/bin/python $app_root/app/manage.py runfcgi socket=$app_root/fcgi.sock workdir=$app_root/app/");
+define("SOCKET", "$app_root/fcgi.sock");
 
 # web.py demo
 #define("SPAWN", "spawn-fcgi -s /tmp/fcgi-demo.sock -d ".getcwd()." -- python demo.py fastcgi");
@@ -357,6 +358,7 @@ function pass_request() {
 	foreach($_SERVER as $k => $v) {
 		$env[$k] = $v;
 	}
+	$env['PATH_INFO'] = $env['REQUEST_URI'];  # for django
 
     $requestId = 1;
 
