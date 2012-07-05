@@ -466,6 +466,7 @@ function pass_request() {
                 # Append a dummy reason phrase if one was not provided
                 $status .= ' FCGIApp';
 			}
+			header("HTTP/1.0 ".$status);
 		}
         else {
             $headers[] = array($header, $value);
@@ -474,7 +475,6 @@ function pass_request() {
 
     $result = substr($result, $pos);
 
-    # FIXME: do something with $status?
     return array($headers, $result);
 }
 
