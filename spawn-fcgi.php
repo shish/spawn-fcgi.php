@@ -1,6 +1,22 @@
 #!/usr/bin/php
 <?php
 /*
+ * Configure these:
+ *
+ * SPAWN should be a command to spawn a fastcgi process on a socket
+ * SOCKET should point to the socket
+ *
+ * the example SPAWN is a django app (installed in ../app) using a
+ * python virtualenv (installed in ../python)
+ */
+define("SPAWN", "../python/bin/python ../app/manage.py runfcgi socket=".getcwd()."/../fcgi.sock");
+define("SOCKET", "../fcgi.sock");
+
+# web.py demo
+#define("SPAWN", "spawn-fcgi -s /tmp/fcgi-demo.sock -d ".getcwd()." -- python demo.py fastcgi");
+
+
+/*
  * Spawn-FCGI.php: A script to translate PHP requests into FastCGI
  * requests, thus allowing hosting of FastCGI apps (good) on any
  * PHP-compatible web host (cheap, common).
@@ -36,12 +52,6 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  */
-
-/* 
- * configurable bits
- */
-define("SPAWN", "/home/shish/bin/spawn-fcgi -s /tmp/fcgi-demo.sock -d ".getcwd()." -- ./demo.py fastcgi");
-define("SOCKET", "/tmp/fcgi-demo.sock");
 
 
 /*
