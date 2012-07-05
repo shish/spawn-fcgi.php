@@ -360,6 +360,9 @@ function pass_request() {
 	}
 	$env['PATH_INFO'] = $env['REQUEST_URI'];  # for django
 
+	# Request IDs are supposed to be kept as small as possible
+	# while remaining unique :S
+    #$requestId = (int)(rand());
     $requestId = 1;
 
     # Begin the request
