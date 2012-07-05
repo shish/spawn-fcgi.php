@@ -158,9 +158,6 @@ function encode_pair($name, $value) {
 function spawn() {
 	#print "Spawning new FastCGI daemon\n";
 	$r = shell_exec(SPAWN);
-	if($r == "") {
-		die("Couldn't spawn FastCGI daemon");
-	}
 }
 
 /*
