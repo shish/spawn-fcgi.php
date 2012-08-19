@@ -10,6 +10,13 @@ shouldn't be too hard to add.
 
 Configuration
 -------------
+Create a spawn-fcgi.conf.php file:::
+
+    <?php
+    define("SPAWN", "spawn-fcgi -s /tmp/fcgi.sock -- python demo.py fastcgi");
+    define("SOCKET", "/tmp/fcgi.sock");
+    ?>
+
 Change the SPAWN define to be a command which creates a daemon process and a
 Unix socket.
 
