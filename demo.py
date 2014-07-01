@@ -1,11 +1,10 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 
 import web
 
 urls = (
     '/', 'index',
     '/(.*)', 'index',
-    '', ''
 )
 app = web.application(urls, globals())
 

@@ -12,8 +12,8 @@ if(file_exists("spawn-fcgi.conf.php")) {
 	require_once("spawn-fcgi.conf.php");
 }
 else {
-	$app_root = getcwd()."/..";
-	define("SPAWN", "spawn-fcgi -s $app_root/fcgi.sock -d $app_root/htdocs/ -- python demo.py fastcgi");
+	$app_root = realpath(getcwd() . "/../");
+	define("SPAWN", "spawn-fcgi -s $app_root/fcgi.sock -d $app_root/htdocs/ -- ../venv/bin/python demo.py fastcgi");
 	define("SOCKET", "$app_root/fcgi.sock");
 }
 
@@ -357,9 +357,11 @@ function pass_request() {
 
 	$env = array();
 	foreach($_SERVER as $k => $v) {
-		$env[$k] = $v;
+		if(!is_array($v)) {
+			$env[$k] = $v;
+		}
 	}
-	$env['PATH_INFO'] = $env['REQUEST_URI'];  # for django
+	$env['PATH_INFO'] = @$env['REQUEST_URI'];  # for django
 
 	# Request IDs are supposed to be kept as small as possible
 	# while remaining unique :S
